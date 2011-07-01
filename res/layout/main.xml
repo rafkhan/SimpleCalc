@@ -24,13 +24,13 @@
         		android:textSize="16pt"
         		android:layout_height="fill_parent"
         		android:layout_width="fill_parent" 
-        		android:gravity="center_vertical|center_horizontal"/>
+        		android:gravity="center_vertical|center_horizontal|right"/>
         		
         	<Button
      			android:textSize="8pt"	
         		android:background="#000000"
         		android:textColor="#FFFFFF"
-        		android:layout_weight="4"
+        		android:layout_weight="2"
      			android:layout_height="fill_parent"
      			android:layout_width="fill_parent"
      			android:text="CLR"
@@ -233,7 +233,7 @@
      			android:layout_height="fill_parent"
      			android:layout_width="fill_parent"
      			android:text="="
-     			android:onClick="addButton" />
+     			android:onClick="bEql" />
      			
      		<Button
      			android:textSize="13pt"	

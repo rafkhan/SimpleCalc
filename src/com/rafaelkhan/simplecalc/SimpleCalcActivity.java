@@ -12,93 +12,145 @@ public class SimpleCalcActivity extends Activity {
 	public Float operand1;
 	public Float operand2;
 	public Float answer;
+	public Boolean overwrite = true;
+	public Boolean canOp = true;
 	private char operator;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
-    	this.currentField = "";
+    	this.currentField = "0";
     	this.operator = ' ';
+    	this.operand1 = 0f;
+    	this.operand2 = 0f;
+    	this.answer = 0f;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+    	this.setField("0");
     }
     
-    public void setAnswer() {
+    public void setAnswer() { //update field
     	TextView tvId = (TextView) findViewById(R.id.inputField);
     	tvId.setText(this.currentField);
     }
     
+    public void setField(String s) { //set field to value of s
+    	TextView tvId = (TextView) findViewById(R.id.inputField);
+    	tvId.setText(s);
+    }
+    
     public void b1(View v) {
-    	if(this.currentField.length() <= MAX_CHAR) {
+    	if(this.currentField.length() <= MAX_CHAR && this.overwrite == false) {
     		this.currentField += "1";
+    	}
+    	else if(this.overwrite) {
+    		this.currentField = "1";
+    		this.overwrite = false;
     	}
     	this.setAnswer();
     }
     
     public void b2(View v) {
-    	if(this.currentField.length() <= MAX_CHAR) {
+    	if(this.currentField.length() <= MAX_CHAR && this.overwrite == false) {
     		this.currentField += "2";
+    	}
+    	else if(this.overwrite) {
+    		this.currentField = "2";
+    		this.overwrite = false;
     	}
     	this.setAnswer();
     }
 
     public void b3(View v) {
-    	if(this.currentField.length() <= MAX_CHAR) {
+    	if(this.currentField.length() <= MAX_CHAR && this.overwrite == false) {
     		this.currentField += "3";
+    	}
+    	else if(this.overwrite) {
+    		this.currentField = "3";
+    		this.overwrite = false;
     	}
     	this.setAnswer();
     }
     
     public void b4(View v) {
-    	if(this.currentField.length() <= MAX_CHAR) {
+    	if(this.currentField.length() <= MAX_CHAR && this.overwrite == false) {
     		this.currentField += "4";
+    	}
+    	else if(this.overwrite) {
+    		this.currentField = "4";
+    		this.overwrite = false;
     	}
     	this.setAnswer();
     }
     
     public void b5(View v) {
-    	if(this.currentField.length() <= MAX_CHAR) {
+    	if(this.currentField.length() <= MAX_CHAR && this.overwrite == false) {
     		this.currentField += "5";
+    	}
+    	else if(this.overwrite) {
+    		this.currentField = "5";
+    		this.overwrite = false;
     	}
     	this.setAnswer();
     }	
     
     public void b6(View v) {
-    	if(this.currentField.length() < MAX_CHAR) {
+    	if(this.currentField.length() <= MAX_CHAR && this.overwrite == false) {
     		this.currentField += "6";
+    	}
+    	else if(this.overwrite) {
+    		this.currentField = "6";
+    		this.overwrite = false;
     	}
     	this.setAnswer();
     }
     
     public void b7(View v) {
-    	if(this.currentField.length() < MAX_CHAR) {
+    	if(this.currentField.length() <= MAX_CHAR && this.overwrite == false) {
     		this.currentField += "7";
+    	}
+    	else if(this.overwrite) {
+    		this.currentField = "7";
+    		this.overwrite = false;
     	}
     	this.setAnswer();
     }
 
     public void b8(View v) {
-    	if(this.currentField.length() < MAX_CHAR) {
+    	if(this.currentField.length() <= MAX_CHAR && this.overwrite == false) {
     		this.currentField += "8";
+    	}
+    	else if(this.overwrite) {
+    		this.currentField = "8";
+    		this.overwrite = false;
     	}
     	this.setAnswer();
     }
     
     public void b9(View v) {
-    	if(this.currentField.length() < MAX_CHAR) {
+    	if(this.currentField.length() <= MAX_CHAR && this.overwrite == false) {
     		this.currentField += "9";
+    	}
+    	else if(this.overwrite) {
+    		this.currentField = "9";
+    		this.overwrite = false;
     	}
     	this.setAnswer();
     }
     
     public void b0(View v) {
-    	if(this.currentField.length() < MAX_CHAR) {
+    	if(this.currentField.length() <= MAX_CHAR && this.overwrite == false) {
     		this.currentField += "0";
+    	}
+    	else if(this.overwrite) {
+    		this.currentField = "0";
+    		this.overwrite = false;
     	}
     	this.setAnswer();
     }
     
     public void bCLR(View v) {
-    	this.currentField = "";
+    	this.currentField = "0";
+    	this.operator = ' ';
     	this.operand1 = 0f;
     	this.operand2 = 0f;
     	this.answer = 0f;
@@ -106,31 +158,104 @@ public class SimpleCalcActivity extends Activity {
     }
     
     public void bAdd(View v) {
-    	this.operator = '+';
+    	if(this.operator != ' ') {
+    		this.operand1 = Float.valueOf(this.currentField).floatValue();
+    		this.solve();
+    		this.operator = '+';
+    		this.currentField = this.answer.toString();
+    		this.setField(currentField);
+    		this.operand2 = this.answer;
+    		this.overwrite = true;
+    	}
+    	else {
+    		this.operator = '+';
+    		this.operand2 = Float.valueOf(this.currentField).floatValue();
+    		this.currentField = "0";
+    		this.setField(currentField);
+    		this.overwrite = true;		
+    	}
     }
     
     public void bSub(View v) {
-    	this.operator = '-';
+    	if(this.operator != ' ') {
+    		this.operand1 = Float.valueOf(this.currentField).floatValue();
+    		this.solve();
+    		this.operator = '-';
+    		this.currentField = this.answer.toString();
+    		this.setField(currentField);
+    		this.operand2 = this.answer;
+    		this.overwrite = true;
+    	}
+    	else {
+    		this.operator = '-';
+    		this.operand2 = Float.valueOf(this.currentField).floatValue();
+    		this.currentField = "0";
+    		this.setField(currentField);
+    		this.overwrite = true; 		
+    	}
     }
 
     public void bMul(View v) {
-    	this.operator = '*';
+    	if(this.operator != ' ') {
+    		this.operand1 = Float.valueOf(this.currentField).floatValue();
+    		this.solve();
+    		this.operator = '*';
+    		this.currentField = this.answer.toString();
+    		this.setField(currentField);
+    		this.operand2 = this.answer;
+    		this.overwrite = true;
+    	}
+    	else {
+    		this.operator = '*';
+    		this.operand2 = Float.valueOf(this.currentField).floatValue();
+    		this.currentField = "0";
+    		this.setField(currentField);
+    		this.overwrite = true;
+    	}
     }
 
     public void bDiv(View v) {
-    	this.operator = '/';
+    	if(this.operator != ' ') {
+    		this.operand1 = Float.valueOf(this.currentField).floatValue();
+    		this.solve();
+    		this.operator = '/';
+    		this.currentField = this.answer.toString();
+    		this.setField(currentField);
+    		this.operand2 = this.answer;
+    		this.overwrite = true;
+    	}
+    	else {
+    		this.operator = '/';
+    		this.operand2 = Float.valueOf(this.currentField).floatValue();
+    		this.currentField = "0";
+    		this.setField(currentField);
+    		this.overwrite = true;
+    	}
     }
     
-    public void bEql(View v) {
+    public void bEql(View v) {   	
+    	this.operand1 = Float.valueOf(currentField).floatValue();
+    	this.solve();
+    	this.currentField = this.answer.toString();
+		this.setField(currentField);
+    	this.operator = ' ';
+    	this.overwrite = true;
+    }
+    
+    public void solve() {
     	switch(this.operator) {
-    		case '+':
-    			this.answer = this.operand1 + this.operand2;
-    		case '-':
-    			this.answer = this.operand1 - this.operand2;
-    		case '*':
-    			this.answer = this.operand1 * this.operand2;
-    		case '/':
-    			this.answer = this.operand1 / this.operand2;
+		case '+':
+			this.answer = this.operand2 + this.operand1;
+			break;
+		case '-':
+			this.answer = this.operand2 - this.operand1;
+			break;
+		case '*':
+			this.answer = this.operand2 * this.operand1;
+			break;
+		case '/':
+			this.answer = this.operand2 / this.operand1;
+			break;
     	}
     }
 }
