@@ -7,7 +7,7 @@ import android.view.View;
 public class SimpleCalcActivity extends Activity {
 	
 	public final int MAX_CHAR = 10; //max characters in input field
-	public String currentField; //input field
+	public String currentField = ""; //input field
 	public Float operand1;
 	public Float operand2;
 	public Float answer;
