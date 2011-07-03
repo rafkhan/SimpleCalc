@@ -25,7 +25,7 @@ public class SimpleCalcActivity extends Activity {
     	this.answer = 0f;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-    	this.setField("0");
+    	this.setAnswer();
     }
     
     public void setAnswer() { //update field
@@ -34,13 +34,21 @@ public class SimpleCalcActivity extends Activity {
     }
     
     public void setField(String s) { //set field to value of s
+    	if(s.endsWith(".0")) {
+    		s = s.substring(0, s.length() - 2);
+    	}
     	TextView tvId = (TextView) findViewById(R.id.inputField);
     	tvId.setText(s);
     }
     
     public void b1(View v) {
     	if(this.currentField.length() <= MAX_CHAR && this.overwrite == false) {
-    		this.currentField += "1";
+    		if(this.currentField.equals("0")) {
+    			this.currentField = "1";
+    		}
+    		else {
+    			this.currentField += "1";
+    		}
     	}
     	else if(this.overwrite) {
     		this.currentField = "1";
@@ -51,7 +59,12 @@ public class SimpleCalcActivity extends Activity {
     
     public void b2(View v) {
     	if(this.currentField.length() <= MAX_CHAR && this.overwrite == false) {
-    		this.currentField += "2";
+    		if(this.currentField.equals("0")) {
+    			this.currentField = "2";
+    		}
+    		else {
+    			this.currentField += "2";
+    		}
     	}
     	else if(this.overwrite) {
     		this.currentField = "2";
@@ -62,7 +75,12 @@ public class SimpleCalcActivity extends Activity {
 
     public void b3(View v) {
     	if(this.currentField.length() <= MAX_CHAR && this.overwrite == false) {
-    		this.currentField += "3";
+    		if(this.currentField.equals("0")) {
+    			this.currentField = "3";
+    		}
+    		else {
+    			this.currentField += "3";
+    		}
     	}
     	else if(this.overwrite) {
     		this.currentField = "3";
@@ -73,7 +91,12 @@ public class SimpleCalcActivity extends Activity {
     
     public void b4(View v) {
     	if(this.currentField.length() <= MAX_CHAR && this.overwrite == false) {
-    		this.currentField += "4";
+    		if(this.currentField.equals("0")) {
+    			this.currentField = "4";
+    		}
+    		else {
+    			this.currentField += "4";
+    		}
     	}
     	else if(this.overwrite) {
     		this.currentField = "4";
@@ -84,7 +107,12 @@ public class SimpleCalcActivity extends Activity {
     
     public void b5(View v) {
     	if(this.currentField.length() <= MAX_CHAR && this.overwrite == false) {
-    		this.currentField += "5";
+    		if(this.currentField.equals("0")) {
+    			this.currentField = "5";
+    		}
+    		else {
+    			this.currentField += "5";
+    		}
     	}
     	else if(this.overwrite) {
     		this.currentField = "5";
@@ -95,7 +123,12 @@ public class SimpleCalcActivity extends Activity {
     
     public void b6(View v) {
     	if(this.currentField.length() <= MAX_CHAR && this.overwrite == false) {
-    		this.currentField += "6";
+    		if(this.currentField.equals("0")) {
+    			this.currentField = "6";
+    		}
+    		else {
+    			this.currentField += "6";
+    		}
     	}
     	else if(this.overwrite) {
     		this.currentField = "6";
@@ -106,7 +139,12 @@ public class SimpleCalcActivity extends Activity {
     
     public void b7(View v) {
     	if(this.currentField.length() <= MAX_CHAR && this.overwrite == false) {
-    		this.currentField += "7";
+    		if(this.currentField.equals("0")) {
+    			this.currentField = "7";
+    		}
+    		else {
+    			this.currentField += "7";
+    		}
     	}
     	else if(this.overwrite) {
     		this.currentField = "7";
@@ -117,7 +155,12 @@ public class SimpleCalcActivity extends Activity {
 
     public void b8(View v) {
     	if(this.currentField.length() <= MAX_CHAR && this.overwrite == false) {
-    		this.currentField += "8";
+    		if(this.currentField.equals("0")) {
+    			this.currentField = "8";
+    		}
+    		else {
+    			this.currentField += "8";
+    		}
     	}
     	else if(this.overwrite) {
     		this.currentField = "8";
@@ -128,7 +171,12 @@ public class SimpleCalcActivity extends Activity {
     
     public void b9(View v) {
     	if(this.currentField.length() <= MAX_CHAR && this.overwrite == false) {
-    		this.currentField += "9";
+    		if(this.currentField.equals("0")) {
+    			this.currentField = "9";
+    		}
+    		else {
+    			this.currentField += "9";
+    		}
     	}
     	else if(this.overwrite) {
     		this.currentField = "9";
@@ -139,7 +187,12 @@ public class SimpleCalcActivity extends Activity {
     
     public void b0(View v) {
     	if(this.currentField.length() <= MAX_CHAR && this.overwrite == false) {
-    		this.currentField += "0";
+    		if(this.currentField.equals("0")) {
+    			this.currentField = "0";
+    		}
+    		else {
+    			this.currentField += "0";
+    		}
     	}
     	else if(this.overwrite) {
     		this.currentField = "0";
@@ -154,7 +207,7 @@ public class SimpleCalcActivity extends Activity {
     	this.operand1 = 0f;
     	this.operand2 = 0f;
     	this.answer = 0f;
-    	this.setAnswer();
+    	this.setField(this.currentField);
     }
     
     public void bAdd(View v) {
@@ -237,9 +290,17 @@ public class SimpleCalcActivity extends Activity {
     	this.operand1 = Float.valueOf(currentField).floatValue();
     	this.solve();
     	this.currentField = this.answer.toString();
-		this.setField(currentField);
+		this.setField(this.currentField);
     	this.operator = ' ';
     	this.overwrite = true;
+    }
+    
+    public void bNeg(View v) {
+    	Float ans;
+    	ans = Float.valueOf(this.currentField).floatValue();
+    	ans *= -1;
+    	this.currentField = ans.toString();
+    	this.setField(this.currentField);
     }
     
     public void solve() {

@@ -213,7 +213,7 @@
      			android:layout_height="fill_parent"
      			android:layout_width="fill_parent"
      			android:text="."
-     			android:onClick="addButton" />
+     			android:onClick="bDec" />
      			
      		<Button
      			android:textSize="13pt"		
@@ -223,7 +223,7 @@
      			android:layout_height="fill_parent"
      			android:layout_width="fill_parent"
      			android:text="+/-"
-     			android:onClick="addButton" />
+     			android:onClick="bNeg" />
      			
      		<Button
      			android:textSize="13pt"	
